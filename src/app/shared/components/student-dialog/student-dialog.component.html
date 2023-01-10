@@ -1,0 +1,38 @@
+
+<h1 mat-dialog-title>Agregar Estudiante</h1>
+<div mat-dialog-content>
+<form class="flex flex-column" [formGroup]="studentForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input [formControl]="firstNameControl" matInput placeholder="Placeholder">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Nombre</mat-hint>
+        <mat-error *ngIf="firstNameControl.hasError('required')">
+          <strong>required min: 2 letras</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input [formControl]="lastNameControl" matInput placeholder="Placeholder">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Apellido</mat-hint>
+        <mat-error *ngIf="lastNameControl.hasError('required')">
+           <strong>required min: 2 letras </strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input [formControl]="email" matInput placeholder="Placeholder">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Email</mat-hint>
+        
+        <mat-error *ngIf="email.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    
+    <div mat-dialog-actions>
+        <button mat-button (click)="close()" >Cancelar</button>
+        <button  mat-button [mat-dialog-close]="studentForm.value" cdkFocusInitial>Guardar</button>
+      </div>
+</form>   

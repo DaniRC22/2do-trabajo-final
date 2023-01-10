@@ -1,0 +1,40 @@
+<head appMidirective>Lengua</head>
+<button (click)="addStudent()" mat-flat-button color ="primary"> Agregar Curso</button>
+<table mat-table [dataSource]="students">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No.</th>
+        <td mat-cell *matCellDef="let lengua">{{lengua.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="curso">
+        <th mat-header-cell *matHeaderCellDef> Curso</th>
+        <td mat-cell *matCellDef="let lengua">{{lengua.curso}}</td>
+    </ng-container>
+    <ng-container matColumnDef="profesor">
+        <th mat-header-cell *matHeaderCellDef> Profesor</th>
+        <td mat-cell *matCellDef="let lengua">{{lengua.profesor}} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email</th>
+        <td mat-cell *matCellDef="let lengua">{{lengua.email}}</td>
+    </ng-container>
+   
+    <ng-container matColumnDef="editar" >
+        <th mat-header-cell *matHeaderCellDef > Editar</th>
+        <td mat-cell *matCellDef="let lengua" >
+            <button (click)="editStudent(lengua)" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="eliminar">
+        <th mat-header-cell *matHeaderCellDef>Eliminar </th>
+        <td mat-cell *matCellDef="let lengua">
+            <button (click)="removeStudent(lengua)" mat-icon-button color="warn"> 
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<!--<app-pagina2 *ngFor="let student of students  " [cursoLista]="student"></app-pagina2>-->

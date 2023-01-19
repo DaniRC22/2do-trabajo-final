@@ -18,23 +18,24 @@ import { RouterModule } from '@angular/router';
 import { LayoutModule } from './layouts/layout.module';
 import { Layout1Module } from './layout/layout1.module';
 import { PaginasModule } from './paginas/paginas.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
-    AppComponent,  
+    AppComponent,
+      
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
+    BrowserModule,BrowserAnimationsModule,
     ReactiveFormsModule,
     ModulesModule,
     AppRoutingModule,
     LayoutModule,
     Layout1Module,
     SharedModuleModule,
-    PaginasModule
+    PaginasModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

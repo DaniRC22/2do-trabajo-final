@@ -1,6 +1,11 @@
-<br>
-<header>
-    <strong appMidirective>
-    Proyecto Final 1ra
-</strong>
-</header>
+
+  <button type="button" mat-icon-button (click)="toggleSidebar.emit()">
+  </button>
+  <b style="cursor: pointer;" *ngIf="user;else templateName" routerLink="my-profile">
+    AUTENTICADO: {{ user.fullName }}
+  </b>
+  <!-- <button routerLink="/auth/login" mat-flat-button color="primary">Iniciar sesión</button> -->
+  <button type="button" class="btn btn-outline-light" (click)="login()" *ngIf="!isLogged">INGRESO</button>
+  <button type="button" class="btn btn-outline-light" (click)="onLogOut()">CERRAR SESION</button>
+  <ng-template #templateName>
+  </ng-template>

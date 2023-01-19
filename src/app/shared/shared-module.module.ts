@@ -6,7 +6,8 @@ import { PagesComponent } from './pages/pages.component';
 import { HeaderComponent } from './header/header.component';
 import { ModulesModule } from './modules/modules.module';
 import { MidirectiveDirective } from './midirective.directive';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,12 +16,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     PagesComponent,
     StudentDialogComponent,
-    MidirectiveDirective
+    MidirectiveDirective,
   ],
   imports: [
     CommonModule,
     ModulesModule,
     ReactiveFormsModule,
+    FormsModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,

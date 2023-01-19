@@ -1,0 +1,15 @@
+<form (ngSubmit)="Editar()" novalidate #f="ngForm">
+    <div class="element">
+        <label for="element">Nombre</label>
+        <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="curso.curso">
+    </div>
+    <div class="element">
+        <label for="element">Email</label>
+        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="curso.email">
+    </div>
+    <div class="element">
+        <label for="element">profesor</label>
+        <input type="text" class="form-control" id="teacher" name="teacher" [(ngModel)]="curso.teacher">
+    </div>
+    <button>guardar</button>
+</form>

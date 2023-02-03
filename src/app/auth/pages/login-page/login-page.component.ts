@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { SessionService } from '../../services/session.service';
+// import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,12 +20,12 @@ export class LoginPageComponent implements OnDestroy {
 
   constructor(
     private readonly authService: AuthService,
-    private readonly sessionService: SessionService,
+    // private readonly sessionService: SessionService,
     private readonly router: Router,
   ) {
-    this.sessionService.user$.pipe(takeUntil(this.destroyed$)).subscribe((user) => {
-      if (user) this.router.navigate(['/Curso'])
-    });
+    // this.sessionService.user$.pipe(takeUntil(this.destroyed$)).subscribe((user) => {
+    //   if (user) this.router.navigate(['/Curso'])
+    // });
   }
 
   ngOnDestroy(): void {

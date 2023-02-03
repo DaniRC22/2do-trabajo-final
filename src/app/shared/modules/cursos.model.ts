@@ -8,6 +8,6 @@ export class Curso {
         public id: number,
         public email:string,
         public curso: string,
-        public teacher:string
+        public profesor:string
     ) {}
 }

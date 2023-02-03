@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, mergeMap, of, tap } from 'rxjs';
-import { SessionService } from './session.service';
+// import { SessionService } from './session.service';
 import { User } from 'src/app/shared/modules/user.model';
 import { LoginSuccessful, SingleUserResponse } from 'src/app/shared/modules/reqres.interfaces';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { setAuthenticatedUser, unsetAuthenticatedUser } from '../store/auth/auth.actions';
+import { AppState } from 'src/app/shared/modules/app-state.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +18,8 @@ export class AuthService {
 
   constructor(
     private readonly httpClient: HttpClient,
-    private readonly sessionService: SessionService,
-    private router:Router
+    private readonly store: Store<AppState>,
+    private router:Router,
   ) {}
 
   login(data: { email: string; password: string }): Observable<User> {
@@ -36,7 +40,10 @@ export class AuthService {
               data.avatar
             )
         ),
-        tap((user) => this.sessionService.setUser(user)),
+        //  tap((user) => this.sessionService.setUser(user)),
+            tap((user) => this.store.dispatch(setAuthenticatedUser({
+              authenticatedUser : user
+            })))
         
       );
       
@@ -44,8 +51,9 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem('token');
-    this.sessionService.setUser(null);
-    this.router.navigate(['auth', 'login'])
+    // this.sessionService.setUser(null);
+    this.store.dispatch(unsetAuthenticatedUser());
+    this.router.navigate(['auth', 'login']);
   }
 
   verifyToken(): Observable<boolean> {
@@ -59,15 +67,27 @@ export class AuthService {
         this.httpClient.get<SingleUserResponse>(`${this.apiUrl}/users/7`)
       ),
       tap(({data}) =>
-      this.sessionService.setUser(
-        new User(
-          data.id,
-              data.email,
-              data.first_name,
-              data.last_name,
-              data.avatar
-        )
-      )),
+      this.store.dispatch(
+        setAuthenticatedUser({
+          authenticatedUser: new User(
+            data.id,
+               data.email,
+               data.first_name,
+               data.last_name,
+               data.avatar
+          )
+        })
+      )
+      // this.sessionService.setUser(
+      //   new User(
+      //     data.id,
+      //         data.email,
+      //         data.first_name,
+      //         data.last_name,
+      //         data.avatar
+      //   )
+      // )
+      ),
       map((user) => !!user),
       catchError(()=> of(false))
     )

@@ -20,14 +20,12 @@ import { EditarComponent } from './pagina1/curso/editar/editar.component';
 @NgModule({
   declarations: [
     StudentsComponent,
-    Pagina1Component,
     Pagina2Component,
-    CursoDialogComponent,
     VerMasComponent,
     EditarStudentsComponent,
     EditarInscripcionComponent,
     GuardarInscripcionComponent,
-    EditarComponent
+    
   ],
   imports: [
     CommonModule,
@@ -40,7 +38,6 @@ import { EditarComponent } from './pagina1/curso/editar/editar.component';
   ],
   exports:[
     StudentsComponent,
-    Pagina1Component,
     Pagina2Component,
     VerMasComponent
   ]

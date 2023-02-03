@@ -8,6 +8,7 @@ import { ModulesModule } from './modules/modules.module';
 import { MidirectiveDirective } from './midirective.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CursoModule } from '../paginas/pagina1/curso.module';
 
 
 
@@ -23,7 +24,8 @@ import { RouterModule } from '@angular/router';
     ModulesModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    CursoModule
   ],
   exports: [
     HeaderComponent,

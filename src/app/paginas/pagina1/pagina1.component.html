@@ -1,5 +1,8 @@
-<head appMidirective>Lengua</head>
-<button routerLink="/crearcurso" mat-flat-button color ="primary"> Agregar Curso</button>
+<div *ngIf="loading; else elseTemplate">
+CARGANDO
+</div>
+<ng-template #elseTemplate>
+<button (click)="createCurso()" mat-flat-button color ="primary"> Agregar Curso</button>
 <table mat-table [dataSource]="(curso)">
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> No.</th>
@@ -11,7 +14,7 @@
     </ng-container>
     <ng-container matColumnDef="profesor">
         <th mat-header-cell *matHeaderCellDef> Profesor</th>
-        <td mat-cell *matCellDef="let lengua">{{lengua.teacher}} </td>
+        <td mat-cell *matCellDef="let lengua">{{lengua.profesor}} </td>
     </ng-container>
     <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email</th>
@@ -20,8 +23,8 @@
    
     <ng-container matColumnDef="editar" >
         <th mat-header-cell *matHeaderCellDef > Editar</th>
-        <td mat-cell *matCellDef="let lengua" >
-            <button routerLink="/editarcurso/{{lengua.id}}"  mat-icon-button>
+        <td mat-cell *matCellDef="let element" >
+            <button (click)="editar(element)"  mat-icon-button>
                 <mat-icon>edit</mat-icon>
             </button>
         </td>
@@ -29,7 +32,8 @@
     <ng-container matColumnDef="eliminar">
         <th mat-header-cell *matHeaderCellDef>Eliminar </th>
         <td mat-cell *matCellDef="let lengua">
-            <button (click)="eliminar(lengua)" mat-icon-button color="warn"> 
+            <button (click)="delete(lengua.id)" 
+            mat-icon-button color="warn"> 
                 <mat-icon>delete</mat-icon>
             </button>
         </td>
@@ -37,4 +41,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</ng-template>
 <!--<app-pagina2 *ngFor="let student of students  " [cursoLista]="student"></app-pagina2>-->
+<!-- (click)="eliminar(lengua)" -->

@@ -4,9 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './shared/header/header.component';
-import { PagesComponent } from './shared/pages/pages.component';
-import { StudentsComponent } from './paginas/students/students.component';
+
 import { ModulesModule } from './shared/modules/modules.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentDialogComponent } from './shared/components/student-dialog/student-dialog.component';
@@ -19,6 +17,11 @@ import { LayoutModule } from './layouts/layout.module';
 import { Layout1Module } from './layout/layout1.module';
 import { PaginasModule } from './paginas/paginas.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AppStoreModule } from './app-store.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { CursoModule } from './paginas/pagina1/curso.module';
 
 
 @NgModule({
@@ -31,11 +34,17 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     ModulesModule,
     AppRoutingModule,
+    RouterModule,
     LayoutModule,
     Layout1Module,
     SharedModuleModule,
     PaginasModule,
-    HttpClientModule
+    HttpClientModule,
+    AppStoreModule,
+   
+    
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

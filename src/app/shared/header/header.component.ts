@@ -1,9 +1,13 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { User } from '../modules/user.model';
-import { Subject, takeUntil } from 'rxjs';
-import { SessionService } from 'src/app/auth/services/session.service';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+
+import { authenticatedUserSelector } from 'src/app/auth/store/auth/auth.selectors';
+import { AppState } from '../modules/app-state.model';
 
 @Component({
   selector: 'app-header',
@@ -11,26 +15,22 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnDestroy {
-  isLogged = false;
+
   @Output() toggleSidebar = new EventEmitter()
-  public user: User | null = null;
+  // public user: User | null = null;
+  public user: Observable<User | null>;
   private destroyed$ = new Subject();
-  constructor(private sessionService: SessionService, private authService: AuthService, private activateRouter:ActivatedRoute, private router:Router) {
-    this.sessionService.user$
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((user) => {
-        if (user) this.user = user;
-      })
+  constructor(private readonly store: Store<AppState>, private authService: AuthService, private activateRouter:ActivatedRoute, private router:Router) {
+   this.user = this.store.select(authenticatedUserSelector)
   }
-  ngOnDestroy(): void {
-    this.destroyed$.next(true)
-  }
+  ngOnDestroy(): void {}
 
-onLogOut():void{
-    this.authService.logOut();
-    window.location.reload();
-  }
+ onLogOut():void{
+     this.authService.logOut();
+     window.location.reload();
+   }
 
- login(){
-    this.router.navigate(['/login'])
-  }}
+  login(){
+     this.router.navigate(['/login'])
+  }
+}

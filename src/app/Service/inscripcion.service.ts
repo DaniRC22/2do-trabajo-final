@@ -8,13 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InscripcionService {
-  //  Ins: Inscripcion[] = [
-  //    new Inscripcion(1,'Matematicas','Rivero' ),
-  //    new Inscripcion(2, 'Lengua','asf'),
-  //    new Inscripcion(3, 'Ingles','asda'),
-  //    new Inscripcion(4, 'Sociales','asfasf'),
-  //  ]
-
     URL= environment.URL;
 
     constructor(private http:HttpClient) { }

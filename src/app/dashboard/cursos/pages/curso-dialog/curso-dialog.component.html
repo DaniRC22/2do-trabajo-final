@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Crear curso</h1>
+<div mat-dialog-content>
+  <form class="flex flex-column" [formGroup]="cursoForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Profesor</mat-label>
+      <input matInput [formControl]="profesor">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [formControl]="email">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Materia</mat-label>
+      <input matInput [formControl]="curso">
+    </mat-form-field>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="cursoForm.value" cdkFocusInitial>
+    Ok
+  </button>

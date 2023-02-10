@@ -8,13 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CursosService {
-  // cursos: Curso[] = [
-  //   new Curso(1,'Matematicas','Roberto','matematicas@hotmail.com' ),
-  //   new Curso(2, 'Lengua','Alberto','lengua@hotmail.com'),
-  //   new Curso(3, 'Ingles','Julia','ingles@hotmail.com'),
-  //   new Curso(4, 'Sociales','Julia','sociales@hotmail.com'),
-  // ]
-   URL = environment.URL;
+   URL ='https://63bdfda6f5cfc0949b4fdb0c.mockapi.io/cursos'
 
    constructor(private http:HttpClient) { }
    public lista(): Observable<Curso[]> {
@@ -31,7 +25,7 @@ export class CursosService {
    public delete(id:number): Observable<any>{
      return this.http.delete<any>(this.URL + `/${id}`);
    }
-   public update(id:number, curso:Curso): Observable<any>{
-     return this.http.put<any>(this.URL + `/${id}`, curso);
+   public update(id:number, curso:Curso): Observable<Curso>{
+     return this.http.put<Curso>(this.URL + `/${id}`, curso);
  }
  }

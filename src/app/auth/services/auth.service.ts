@@ -14,6 +14,7 @@ import { AppState } from 'src/app/shared/modules/app-state.model';
   providedIn: 'root'
 })
 export class AuthService {
+  islogged= false;
   apiUrl = 'https://reqres.in/api';
 
   constructor(
@@ -23,6 +24,7 @@ export class AuthService {
   ) {}
 
   login(data: { email: string; password: string }): Observable<User> {
+    this.islogged = true;
     return this.httpClient
       .post<LoginSuccessful>(`${this.apiUrl}/login`, data)
       .pipe(
@@ -37,12 +39,12 @@ export class AuthService {
               data.email,
               data.first_name,
               data.last_name,
-              data.avatar
-            )
+              data.avatar,
+              )
         ),
-        //  tap((user) => this.sessionService.setUser(user)),
             tap((user) => this.store.dispatch(setAuthenticatedUser({
               authenticatedUser : user
+              
             })))
         
       );
@@ -51,7 +53,6 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem('token');
-    // this.sessionService.setUser(null);
     this.store.dispatch(unsetAuthenticatedUser());
     this.router.navigate(['auth', 'login']);
   }
@@ -74,19 +75,10 @@ export class AuthService {
                data.email,
                data.first_name,
                data.last_name,
-               data.avatar
+               data.avatar,
           )
         })
       )
-      // this.sessionService.setUser(
-      //   new User(
-      //     data.id,
-      //         data.email,
-      //         data.first_name,
-      //         data.last_name,
-      //         data.avatar
-      //   )
-      // )
       ),
       map((user) => !!user),
       catchError(()=> of(false))

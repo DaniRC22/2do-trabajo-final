@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'agregarinscripcion',
-    canActivate: [AuthGuard],
+    
     component: GuardarInscripcionComponent
   },
   {

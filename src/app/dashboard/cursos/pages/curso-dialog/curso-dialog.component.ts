@@ -9,7 +9,7 @@ import { Curso } from 'src/app/shared/modules/cursos.model';
   styleUrls: ['./curso-dialog.component.css']
 })
 export class CursoDialogComponent {
- public profesor = new FormControl('', [Validators.required]);
+ public profesor = new FormControl('', [Validators.required, Validators.minLength(3)]);
  public email = new FormControl('', [Validators.required, Validators.email]);
  public curso = new FormControl('', [Validators.required]);
   public cursoForm = new FormGroup({

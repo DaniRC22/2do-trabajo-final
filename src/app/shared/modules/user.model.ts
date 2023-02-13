@@ -5,9 +5,16 @@ export class User {
       public first_name: string,
       public last_name: string,
       public avatar: string,
+      public rol: string
     ) {}
   
     get fullName() {
       return this.first_name + ' ' + this.last_name
     }
-  }
+}
+
+export interface LogginForm {
+  email: string;
+  password: string;
+  rol: string;
+}

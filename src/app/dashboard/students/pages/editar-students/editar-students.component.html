@@ -2,11 +2,11 @@
 <form (ngSubmit)="Editar()" novalidate #f="ngForm">
     <div class="element">
         <label for="element">Nombre</label>
-        <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="estu.lastname">
+        <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="estu.lastname" required>
     </div>
     <div class="element">
         <label for="element">Email</label>
-        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="estu.email">
+        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="estu.email" required>
     </div>
-    <button>guardar</button>
+    <button class="btn btn-success">guardar</button>
 </form>

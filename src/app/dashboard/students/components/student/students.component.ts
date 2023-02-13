@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Student } from 'src/app/shared/modules/students.model';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { EstudianteService } from 'src/app/Service/estudiante.service';
 import { StudentDialogComponent } from '../../pages/student-dialog/student-dialog.component';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-students',
@@ -13,11 +14,17 @@ import { StudentDialogComponent } from '../../pages/student-dialog/student-dialo
 })
 export class StudentsComponent implements OnInit {
   stu : Student [] = [];
-  islogged= false;
+  loading = false;
+  islogged = false;
    displayedColumns = ['id', 'lastname','email', 'delete', 'edit', 'viewDetail'];
-constructor(private estudianteS: EstudianteService, private readonly dialogService: MatDialog){}
+constructor(private estudianteS: EstudianteService, private readonly dialogService: MatDialog, private authS:AuthService){}
 ngOnInit(): void{
-this.cargarStu()
+this.cargarStu();
+ if(this.authS.verifyToken()){
+  this.islogged= true
+ } else {
+  this.islogged = false
+ }
 }
 
 cargarStu(): void{
@@ -29,6 +36,7 @@ cargarStu(): void{
   )
 }
     editar(element: Student) {
+      this.loading = true
       const dialog = this.dialogService.open(StudentDialogComponent, {
         data: element
       })

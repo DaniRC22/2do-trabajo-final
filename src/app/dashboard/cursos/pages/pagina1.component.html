@@ -18,7 +18,8 @@ CARGANDO
     </ng-container>
     <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email</th>
-        <td mat-cell *matCellDef="let lengua">{{lengua.email}}</td>
+        <td mat-cell *matCellDef="let lengua" >{{lengua.email}}</td>
+        
     </ng-container>
    
      <!-- <ng-container matColumnDef="editar" >
@@ -31,9 +32,9 @@ CARGANDO
     </ng-container>  -->
     <ng-container matColumnDef="eliminar">
         <th mat-header-cell *matHeaderCellDef>Eliminar </th>
-        <td mat-cell *matCellDef="let lengua">
-            <button (click)="delete(lengua.id)" 
-            mat-icon-button color="warn" *ngIf="islogged"> 
+        <td mat-cell *matCellDef="let lengua" >
+            <button   (click)="delete(lengua.id)" 
+            mat-icon-button color="warn" > 
                 <mat-icon>delete</mat-icon>
             </button>
         </td>

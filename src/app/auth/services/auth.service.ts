@@ -2,20 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, mergeMap, of, tap } from 'rxjs';
 // import { SessionService } from './session.service';
-import { User } from 'src/app/shared/modules/user.model';
+import { LogginForm, User } from 'src/app/shared/modules/user.model';
 import { LoginSuccessful, SingleUserResponse } from 'src/app/shared/modules/reqres.interfaces';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { setAuthenticatedUser, unsetAuthenticatedUser } from '../store/auth/auth.actions';
 import { AppState } from 'src/app/shared/modules/app-state.model';
 
+const TOKEN_KEY = 'AuthToken';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  islogged= false;
   apiUrl = 'https://reqres.in/api';
+  rolTypes: string[] = ['Usuario', 'Administrador'];
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -23,10 +24,11 @@ export class AuthService {
     private router:Router,
   ) {}
 
-  login(data: { email: string; password: string }): Observable<User> {
-    this.islogged = true;
+  login(userLoggin: LogginForm): Observable<User> {
+    const { email, password } = userLoggin;
+    const dataLoggin = { email, password }
     return this.httpClient
-      .post<LoginSuccessful>(`${this.apiUrl}/login`, data)
+      .post<LoginSuccessful>(`${this.apiUrl}/login`, dataLoggin)
       .pipe(
         tap((data) => localStorage.setItem('token', data.token)),
         mergeMap(() =>
@@ -40,6 +42,7 @@ export class AuthService {
               data.first_name,
               data.last_name,
               data.avatar,
+              userLoggin.rol
               )
         ),
             tap((user) => this.store.dispatch(setAuthenticatedUser({
@@ -52,6 +55,7 @@ export class AuthService {
   }
 
   logOut() {
+    window.sessionStorage.clear();
     localStorage.removeItem('token');
     this.store.dispatch(unsetAuthenticatedUser());
     this.router.navigate(['auth', 'login']);
@@ -76,6 +80,7 @@ export class AuthService {
                data.first_name,
                data.last_name,
                data.avatar,
+               ''
           )
         })
       )
@@ -84,4 +89,13 @@ export class AuthService {
       catchError(()=> of(false))
     )
   }
+  getRoles() {
+    return this.rolTypes;
+  }
+
+  public getToken():string{
+    return sessionStorage.getItem(TOKEN_KEY)!;
+  }
+
+
 }

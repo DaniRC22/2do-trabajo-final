@@ -5,21 +5,30 @@
         <mat-card-title>Iniciar sesión</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form class="flex flex-column" [formGroup]="form">
+        <form class="flex flex-column" [formGroup]="form" (submit)=login()>
           <mat-form-field appearance="outline">
-            <mat-label>Outline form field</mat-label>
+            <mat-label>Email</mat-label>
             <input formControlName="email" type="email" matInput placeholder="Placeholder">
             <mat-icon matSuffix>email</mat-icon>
+            <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">El campo email es requerido y debe tener al menos 6 caracteres.</small>
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Outline form field</mat-label>
+            <mat-label>Password</mat-label>
             <input formControlName="password" type="password" matInput placeholder="Placeholder">
             <mat-icon matSuffix>key</mat-icon>
+            <small *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-danger">El campo email es requerido</small>
           </mat-form-field>
+          <div class="mb-3">
+            <mat-label>Rol</mat-label>
+            <small *ngIf="form.get('rol')?.touched && form.get('rol')?.invalid" class="text-danger">Debe seleccionar un Rol para ingresar.</small>
+            <select class="form-control" formControlName="rol">
+              <option *ngFor="let rol of rolTypes" [value]="rol">{{ rol }}</option>
+            </select>
+          </div>
         </form>
       </mat-card-content>
       <mat-card-actions class="flex justify-content-end">
-        <button [disabled]="loading" mat-flat-button color="primary" (click)="login()">{{ loading ? 'Iniciando sesión' : 'Ingresar' }}</button>
+        <button [disabled]="form.invalid || loading" type="submit" mat-flat-button color="primary" (click)="login()">{{ loading ? 'Iniciando sesión' : 'Ingresar' }}</button>
       </mat-card-actions>
     </mat-card>
   </main>

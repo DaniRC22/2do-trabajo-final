@@ -3,15 +3,18 @@
   <form class="flex flex-column" [formGroup]="cursoForm">
     <mat-form-field appearance="fill">
       <mat-label>Profesor</mat-label>
+      <small *ngIf="cursoForm.get('profesor')?.invalid && cursoForm.get('profesor')?.touched" class="text-danger">El campo 'Profesor' es requerido, minimo 3 letras</small>
       <input matInput [formControl]="profesor">
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput [formControl]="email">
+      <input  matInput [formControl]="email">
+      <small *ngIf="cursoForm.get('email')?.invalid && cursoForm.get('email')?.touched" class="text-danger">El campo email es requerido</small>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Materia</mat-label>
       <input matInput [formControl]="curso">
+      <small *ngIf="cursoForm.get('curso')?.invalid && cursoForm.get('curso')?.touched" class="text-danger">El campo curso es requerido</small>
     </mat-form-field>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

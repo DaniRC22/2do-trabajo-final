@@ -16,7 +16,6 @@ import { AuthService } from '../../../auth/services/auth.service';
 
 export class Pagina2Component implements OnInit {
   ins: Inscripcion []=[];
-  islogged = false
 
   displayedColumns =['id','lastname','curso','editar','eliminar']
 

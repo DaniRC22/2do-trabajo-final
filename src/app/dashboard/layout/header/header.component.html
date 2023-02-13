@@ -1,7 +1,4 @@
 <mat-toolbar class="flex align-items-center justify-content-between" color="primary">
-  <button type="button" mat-icon-button (click)="toggleSidebar.emit()">
-    <mat-icon>menu</mat-icon>
-  </button>
   <b style="cursor: pointer;" *ngIf="user | async;else templateName">
     AUTENTICADO: {{ (user | async)?.fullName }}
   </b>

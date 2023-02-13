@@ -10,7 +10,7 @@ const mockLoginUser = new User (
   'Michael',
   'lawson',
   'https://reqres.in/img/faces/7-image.jpg',
-
+  'Administrador'
 )
 
 fdescribe('AuthService', () => {
@@ -32,7 +32,8 @@ fdescribe('AuthService', () => {
   it('login debe funcionar', (done)=>{
     service.login({
       email: 'fake@email.com',
-      password: '123456'
+      password: '123456',
+      rol:'Usuario'
     }).subscribe((user) => {
       expect(user).toEqual(mockLoginUser)
       done();
@@ -55,7 +56,8 @@ fdescribe('AuthService', () => {
         email: 'michael.lawson@reqres.in',
         first_name: 'Michael',
         last_name: 'lawson',
-        avatar: 'https://reqres.in/img/faces/7-image.jpg'
+        avatar: 'https://reqres.in/img/faces/7-image.jpg',
+        rol: 'Administrador'
       },
       support: {
         url:'https://reqres.in/#support-heading',
